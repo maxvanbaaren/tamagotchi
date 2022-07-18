@@ -1,0 +1,209 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://slime friend v2.png" type="Texture" id=1]
+[ext_resource path="res://slime actions.png" type="Texture" id=2]
+[ext_resource path="res://Slime.gd" type="Script" id=3]
+[ext_resource path="res://font.tres" type="DynamicFont" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Eating"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 16, 9 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Excercising"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Happy"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6, 2, 2.4, 2.8, 3.2, 3.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 11, 12, 13, 12, 13, 12, 13, 12, 13 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 1.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 1.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 3 ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 1.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 4, 5 ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 3.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9, 1.8, 2.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 15, 6, 7, 8 ]
+}
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 141.584
+
+[sub_resource type="CircleShape2D" id=9]
+radius = 133.526
+
+[sub_resource type="CircleShape2D" id=10]
+radius = 136.064
+
+[node name="Slime" type="KinematicBody2D"]
+scale = Vector2( 0.2, 0.2 )
+script = ExtResource( 3 )
+
+[node name="Body" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 4
+frame = 16
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -244.928, 152.875, -311.598, 90.9668, -314.773, -61.4237, -208.417, -204.29, -95.7119, -251.912, 91.6014, -251.912, 221.768, -194.765, 313.838, -74.1229, 313.838, 78.2676, 248.754, 162.4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+anims/Eating = SubResource( 1 )
+anims/Excercising = SubResource( 2 )
+anims/Happy = SubResource( 3 )
+anims/Idle = SubResource( 4 )
+anims/Idle_Happy = SubResource( 5 )
+anims/Idle_Sad = SubResource( 6 )
+anims/Sleeping = SubResource( 7 )
+
+[node name="Actions" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -100 )
+texture = ExtResource( 2 )
+
+[node name="Food" type="Area2D" parent="Actions"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actions/Food"]
+position = Vector2( -307.956, -315.893 )
+shape = SubResource( 8 )
+
+[node name="Love" type="Area2D" parent="Actions"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actions/Love"]
+position = Vector2( 15.874, -380.976 )
+shape = SubResource( 9 )
+
+[node name="Excercise" type="Area2D" parent="Actions"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actions/Excercise"]
+position = Vector2( 309.543, -322.242 )
+shape = SubResource( 10 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Timer2" type="Timer" parent="."]
+one_shot = true
+
+[node name="Timer3" type="Timer" parent="."]
+one_shot = true
+
+[node name="Label" type="Label" parent="."]
+margin_left = -919.5
+margin_top = 153.189
+margin_right = 920.5
+margin_bottom = 720.189
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PoolVector2Array( -244.928, 152.875, -311.598, 90.9668, -314.773, -61.4237, -208.417, -204.29, -95.7119, -251.912, 91.6014, -251.912, 221.768, -194.765, 313.838, -74.1229, 313.838, 78.2676, 248.754, 162.4 )
+[connection signal="input_event" from="." to="." method="_on_Slime_input_event"]
+[connection signal="input_event" from="Actions/Food" to="." method="_on_Food_input_event"]
+[connection signal="input_event" from="Actions/Love" to="." method="_on_Love_input_event"]
+[connection signal="input_event" from="Actions/Excercise" to="." method="_on_Excercise_input_event"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]
+[connection signal="timeout" from="Timer3" to="." method="_on_Timer3_timeout"]
+[connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]
